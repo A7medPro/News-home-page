@@ -17,33 +17,78 @@
   position: relative;
 }
 
-header {
+.logo {
+  margin-left: -95px;
+}
+
+.nav-par {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 200px;
+  list-style: none;
+  position: relative;
+  padding: 11px 90px;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu li {
+  padding-left: 15px;
+}
+
+.menu li a {
+  display: inline-block;
+  text-decoration: none;
+  color: hsl(236, 13%, 42%);
+  text-align: center;
+  transition: 0.15s ease-in-out;
+  position: relative;
+}
+
+.menu li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: hsl(236, 13%, 42%);
+  transition: 0.15s ease-in-out;
+}
+
+.menu li a:hover:after {
   width: 100%;
 }
 
-.logo {
-  margin-left: -195px;
-  margin-right: 689px;
-}
-
-nav {
-  margin-left: 30px;
-}
-
-nav a {
-  text-decoration: none;
-  color: hsl(240, 100%, 5%);
-  font-size: 0.8em;
-  transition: 0.3s;
-}
-
-nav a:hover {
+.menu li a:hover {
   color: hsl(5, 85%, 63%);
-  transform: scale(1.1);
   font-size: 1em;
+  transform: scale(1.1);
+}
+
+.open-menu, .colse-menu {
+  position: absolute;
+  cursor: pointer; 
+  font-size: 1.5rem;
+  display: none;
+}
+
+.open-menu {
+  top: 35px;
+  right: 90px;
+  transform: translateY(-50%);
+}
+
+.colse-menu {
+  top: 17px;
+  right: 90px;
+}
+
+#check {
+  display: none;
 }
 
 .big-img {
@@ -325,34 +370,53 @@ hr {
 
 @media (max-width: 375px) {
 
-  header {
-    width: 20%;
+  .container {
+    max-width: 375px;
   }
   
   .logo {
-    margin-right: -20px;
+    margin-left: -75px;
   }
   
-  nav {
-    margin-right: -20px;
+  .menu {
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    z-index: 100;
+    background-color: hsl(233, 8%, 79%);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu li {
+    margin-top: 90px;
+    margin-left: -10px;
+    padding-left: 40px;
+  }
+
+  .menu li a {
+    padding-top: 10px;
+    padding-left: -9px;
   }
   
-  nav a {
-    text-decoration: none;
-    color: hsl(240, 100%, 5%);
-    font-size: 0.8em;
-    transition: 0.3s;
-  }
-  
-  nav a:hover {
+  .menu li a:hover {
     color: hsl(5, 85%, 63%);
     transform: scale(1.1);
     font-size: 1em;
   }
 
+  .open-menu, .colse-menu {
+    display: block;
+  }
+
+  #check:checked~ .menu {
+    right: 0;
+  }
 
   .big-img {
-    width: 300px;
+    max-width: 240px;
     height: 200px;
     margin-top: 10px;
     margin-left: 20px;
@@ -371,7 +435,7 @@ hr {
   }
 
   .description {
-    width: 360px;
+    max-width: 250px;
     margin-left: 20px;
     margin-top: 10px;
     font-size: 1em;
@@ -400,11 +464,11 @@ hr {
   }
 
   .colum-right {
-    position: absolute;
+    /* position: absolute; */
     left: 20px;
     top: 600px;
-    width: 305px;
-    height: 452px;
+    max-width: 240px;
+    height: 535px;
     background-color: hsl(240, 100%, 5%);
     color: hsl(36, 100%, 99%);
     padding: 20px;
@@ -421,6 +485,7 @@ hr {
     padding: 5px;
     margin-bottom: 8px;
     transition: 0.3s ease-in;
+    width: 210px;
   }
 
   .tit-1:hover {
@@ -437,7 +502,7 @@ hr {
 
   hr {
     border: none;
-    width: 270px;
+    max-width: 205px;
     height: 1px;
     background-color: hsl(236, 13%, 42%);
   }
@@ -466,6 +531,7 @@ hr {
     margin-bottom: 8px;
     margin-top: 8px;
     transition: 0.3s ease-in;
+    width: 210px;
   }
 
   .tit-3:hover {
@@ -481,14 +547,14 @@ hr {
   }
 
   .img-last-1 {
-    top: 515px;
+    top: 570px;
     left: 20px;
     width: 80px;
-    height: 120px;
+    height: 90px;
   }
 
   .tit-01 {
-    top: 510px;
+    top: 565px;
     left: 120px;
     font-size: 1.5em;
     color: hsl(233, 8%, 79%);
@@ -496,8 +562,9 @@ hr {
 
   .tit-last-01 {
     width: 180px;
-    top: 550px;
+    top: 600px;
     left: 120px;
+    font-size: 13px;
     font-weight: 800;
     transition: 0.3s ease-in;
   }
@@ -509,31 +576,33 @@ hr {
   }
 
   .pr-last-01 {
-    width: 230px;
-    top: 585px;
+    max-width: 170px;
+    top: 620px;
     left: 120px;
     line-height: 1.7;
     color: hsl(236, 13%, 42%);
     font-weight: 400;
+    font-size: 0.7em;
   }
 
   .img-last-2 {
     left: 20px;
-    top: 680px;
+    top: 690px;
     width: 80px;
-    height: 120px;
+    height: 90px;
   }
 
   .tit-02 {
-    top: 675px;
+    top: 685px;
     left: 120px;
     font-size: 1.5em;
     color: hsl(233, 8%, 79%);
   }
 
   .tit-last-02 {
-    width: 220px;
-    top: 715px;
+    max-width: 180px;
+    font-size: 13px;
+    top: 720px;
     left: 120px;
     font-weight: 800;
     transition: 0.3s ease-in;
@@ -546,23 +615,24 @@ hr {
   }
 
   .pr-last-02 {
-    width: 230px;
-    top: 750px;
+    max-width: 160px;
+    top: 745px;
     left: 120px;
     line-height: 1.7;
     color: hsl(236, 13%, 42%);
     font-weight: 400;
+    font-size: 0.7em;
   }
 
   .img-last-03 {
     left: 20px;
-    top: 840px;
+    top: 810px;
     width: 80px;
-    height: 120px;
+    height: 90px;
   }
 
   .tit-03 {
-    top: 835px;
+    top: 805px;
     left: 120px;
     font-size: 1.5em;
     color: hsl(233, 8%, 79%);
@@ -570,10 +640,11 @@ hr {
 
   .tit-last-03 {
     position: absolute;
-    width: 220px;
-    top: 875px;
+    max-width: 180px;
+    top: 840px;
     left: 120px;
     font-weight: 800;
+    font-size: 13px;
     transition: 0.3s ease-in;
   }
 
@@ -585,19 +656,22 @@ hr {
 
   .pr-last-03 {
     position: absolute;
-    width: 230px;
-    top: 910px;
+    max-width: 165px;
+    top: 865px;
     left: 120px;
     line-height: 1.7;
     color: hsl(236, 13%, 42%);
     font-weight: 400;
+    font-size: 0.7em;
   }
 
   .attribution {
-    top: 1565px;
-    left: 20px;
+    top: 1520px;
+    left: 10px;
     color: hsl(5, 85%, 63%);
-    font-size: 0.7em;
+    font-size: 13px;
+    max-width: 260px;
+    line-height: 1.8;
   }
 
   .attribution a {
